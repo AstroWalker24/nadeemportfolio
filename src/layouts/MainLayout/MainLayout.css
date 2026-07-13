@@ -1,0 +1,5 @@
+/* ─── MainLayout ─────────────────────────────────────────────── */
+.main-layout__content {
+  min-height: calc(100vh - var(--navbar-height));
+  padding-top: var(--navbar-height);
+}

@@ -1,0 +1,162 @@
+/* ===== Focus ================================================= */
+.focus-section {
+  padding-top: 6rem;
+}
+
+@media (min-width: 768px) {
+  .focus-section {
+    padding-top: 3rem;
+  }
+}
+
+.focus__hd { margin-bottom: var(--space-10); }
+
+.focus__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+@media (max-width: 768px) { .focus__grid { grid-template-columns: 1fr; } }
+
+/* ── Cards ────────────────────────────────────────────────────── */
+.focus__card {
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.focus__card--build { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.focus__side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.focus__card-eyebrow {
+  font-family: var(--font-code);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+/* ── Building ─────────────────────────────────────────────────── */
+.focus__build-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.focus__build-langs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  flex-shrink: 0;
+}
+
+.focus__build-name {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.focus__lang-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: #F97316;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.focus__build-desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Progress bar ─────────────────────────────────────────────── */
+.focus-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.focus-bar__track {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.focus-bar__fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-accent) 0%, rgba(34,211,238,0.45) 100%);
+  border-radius: var(--radius-full);
+}
+
+.focus-bar__pct {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  min-width: 2.2rem;
+  text-align: right;
+}
+
+/* ── Learning ─────────────────────────────────────────────────── */
+.focus__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* ── Reading ──────────────────────────────────────────────────── */
+.focus__book-title {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  line-height: 1.45;
+  margin-bottom: 4px;
+}
+
+.focus__book-author {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* ── Availability ─────────────────────────────────────────────── */
+.focus__avail {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-code);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  padding: var(--space-3) var(--space-5);
+  background: rgba(63, 185, 80, 0.05);
+  border: 1px solid rgba(63, 185, 80, 0.14);
+  border-radius: var(--radius-full);
+}
+
+.focus__avail-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-success);
+  box-shadow: 0 0 8px rgba(63, 185, 80, 0.65);
+  animation: status-pulse 2.8s ease-in-out infinite;
+  flex-shrink: 0;
+}

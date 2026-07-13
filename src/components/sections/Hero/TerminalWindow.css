@@ -1,0 +1,86 @@
+/* ===== Terminal ============================================== */
+.terminal {
+  width: 100%;
+  max-width: 500px;
+  background: #080C10;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.72),
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  font-family: var(--font-code);
+  font-size: 13px;
+  line-height: 1.65;
+  overflow: hidden;
+}
+
+/* ── Title bar ────────────────────────────────────────────────── */
+.terminal__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.022);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.terminal__dots { display: flex; gap: 6px; }
+
+.terminal__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+}
+
+.terminal__dot--r { background: #FF5F57; }
+.terminal__dot--y { background: #FFBD2E; }
+.terminal__dot--g { background: #28C840; }
+
+.terminal__path {
+  flex: 1;
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.26);
+  letter-spacing: 0.02em;
+  margin-right: 28px; /* balance dots */
+}
+
+/* ── Body ─────────────────────────────────────────────────────── */
+.terminal__body {
+  padding: 14px 18px 20px;
+  min-height: 260px;
+}
+
+.terminal__row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  min-height: 1.65em;
+}
+
+.terminal__prompt {
+  color: rgba(34, 211, 238, 0.72);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: 12px;
+}
+
+.terminal__cmd {
+  color: #C9D1D9;
+  word-break: break-all;
+}
+
+.terminal__out {
+  color: #6B7280;
+  font-size: 12.5px;
+}
+
+.terminal__spacer { height: 9px; }
+
+.terminal__cursor {
+  color: var(--color-accent);
+  font-size: 13px;
+  transition: opacity 0.07s;
+  margin-left: 1px;
+}

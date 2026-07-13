@@ -1,0 +1,270 @@
+export const meta = {
+  title: 'Policy Learning methods vs Q Learning',
+  slug: 'policy-learning-qlearning',
+  date: '2024-08-28',
+  readTime: '30 min',
+  tags: ['Reinforcement Learning', 'Policy Gradient', 'Comparision', 'OpenAI Gym', 'Q Learning'],
+  description: 'Discover how understanding the strengths and limitations of Q-Learning and Policy Gradient methods can help you choose the right reinforcement learning algorithm.',
+}
+
+A few months ago, I was working on a project involving a software bot that had to navigate a complex environment. The robot’s task was to find the most efficient path to its destination while avoiding obstacles. Initially, I used Q-learning to train the robot, as it seemed like a straightforward approach. However, as the environment became more complex, I noticed that Q-Learning method was struggling and as a result the performance of the robot decreased.
+
+Around the same time, I was going through some articles as part of my Reinforcement Learning Course assignment, In some article, I came across power of policy gradient methods in Reinforcement Learning. Inspired by this, I decided to give policy gradient methods a try in my project.
+
+Comparatively, the results were far more better. Then i understood that understanding the differences between Q-Learning methods and Policy Gradient methods is crucial for anyone working in the field of Reinforcement learning especially in the real world applications.
+
+## Understanding Q-Learning 
+Q-Learning is a model-free algorithm, meaning it allows the agent to learn how to make decisions without needing a predefined model of the environment. The goal of Q-Learning is to determine the optimal policy for selecting actions. It achieves this by employing a function known as the Q-value Function, which estimates the expected reward for taking a particular action a in a given state s.
+
+
+## The Q-Value Function
+The Q-value function is commonly denoted as Q(s,a) where s represents the current state and a represents the action to be taken. Q(s,a) indicates the expected future rewards when action a is taken in state s.
+
+In Q-Learning, we maintain a Q-table where:
+
+- Rows represent the states.
+- Columns represent the actions.
+
+## The Q-Learning Update Rule
+The update rule for a specific cell in the Q-table is given by:
+
+    Q(s,a)=Q(s,a)+α(r+γmaxQ(s',a')−Q(s,a))
+
+where:
+
+- α = Learning Rate
+- γ = Discount Factor
+
+Although this equation may seem intimidating at first, it becomes much easier to understand once we walk through an example.
+
+## Q-Learning with a Grid World Example
+Let's understand Q-Learning using a simple Grid World.
+
+Imagine an agent trying to reach a goal while avoiding obstacles. Every square represents a state, and the available actions are:
+
+- Move Up
+- Move Down
+- Move Left
+- Move Right
+
+
+The rewards are:
+
+- +1 for reaching the goal
+- −1 for hitting an obstacle
+- 0 for every normal movement
+
+Initially, every Q-value is initialized randomly or, more commonly, to zero. This is called the starting state.
+At the beginning of every episode:
+
+- The environment resets.
+- The agent starts from the initial state.
+- It repeatedly selects actions until it reaches the goal.
+
+## Choosing Actions: Exploration vs Exploitation
+From the current state, the agent chooses an action in one of two ways:
+- Exploration — choosing a random action.
+- Exploitation — selecting the action with the highest Q-value.
+
+This balance is controlled using the ε-Greedy Strategy.
+
+After every action, the agent observes:
+
+- The next state
+- The reward
+- Whether the episode has ended
+
+It then updates the corresponding value in the Q-table using the Q-Learning update rule.
+
+## Implementing Q-Learning in Python
+Now that we've understood the intuition behind Q-Learning, let's look at its implementation in Python.
+
+The implementation below creates a custom Grid World environment, initializes a Q-table, applies the ε-Greedy strategy, and updates the Q-values after every action.
+
+```python
+import numpy as np
+import random as rnd 
+
+# define a custom grid world environment ]
+class GridWorld:
+    def __init__(self,size):
+        self.size=size # size of the grid world
+        self.grid=np.zeros((size,size))
+        self.start_state=(0,0)
+        # placing the obstacle at the center of the grid world 
+        # self.grid[size//2,size//2]=1
+        # self.obstacle_state=(size//2,size//2)
+        self.goal_state=(size-1,size-1)
+        self.current_state=self.start_state
+
+    def reset(self):
+        self.current_state=self.start_state
+        return self.current_state 
+    
+    def step(self,action):
+        x_coord,y_coord =self.current_state 
+        if action==0: # move up
+            x_coord=max(0,x_coord-1)
+        elif action==1: # move down 
+            x_coord=min(self.size-1,x_coord+1)
+        elif action==2: # move left 
+            y_coord=max(0,y_coord-1)
+        elif action==3: # move right 
+            y_coord=min(self.size-1,y_coord+1)
+        else :
+            raise ValueError("Invalid Action")
+        
+        # setting the current state to the updated coordinates 
+        self.current_state=(x_coord,y_coord)
+
+        # if the current state is goal state , reward is 1 else 0
+        if self.current_state == self.goal_state:
+            reward=1
+        else :
+            reward=0
+        
+        if self.current_state==self.goal_state:
+            done = True
+        else :
+            done = False 
+
+        return self.current_state,reward,done
+
+# q-learning algorithm
+def q_learning(env,episodes,alpha,gamma,epsilon):
+    # timesteps for each episode 
+    timesteps=100
+    # initializing the Q-table with random values (preferably zeros)\
+    Q=np.zeros((env.size,env.size,4))
+    
+    # running each episode 
+    for each_episode in range(episodes):
+        
+        # resetting the environment for each episode 
+        state=env.reset()
+        # setting the done Flag to False 
+        done=False 
+        while not done:
+            # epsilon greedy action selection
+            # genereate a random number between 0 and 1
+            random=np.random.random()
+            if random<epsilon:
+                # exploration (random action)
+                action=np.random.randint(0,4)
+            elif random>=epsilon:
+                # exploitation
+                action=np.argmax(Q[state[0],state[1]])
+
+
+            # taking the action and observing the next state and reward and done flag
+            next_state,reward,done=env.step(action)
+
+            # updating the Q-table using Q-Rule 
+            Q[state[0], state[1], action] += alpha * (reward + gamma * np.max(Q[next_state[0], next_state[1]]) - Q[state[0], state[1], action])
+
+            state=next_state
+
+        if each_episode%timesteps==0:
+            print(f"Episode {each_episode} completed")
+
+        
+    return Q
+
+
+# initializing the environment 
+env=GridWorld(5)
+# defining the hyperparameters 
+alpha=0.1
+gamma=0.9
+epsilon=0.1
+episodes=1000
+
+Q_table_final=q_learning(env,episodes,alpha,gamma,epsilon)
+print(Q_table_final)
+```
+
+This is how Q-Learning works. Now lets discuss how “Policy Gradient” method works.
+
+In Q-Learning, we use to find a Q-Value function and then update the Q-Table accordingly, whereas in the case of Policy Gradient method, we wouldn’t be finding any value functions, rather the goal is to learn a policy(agent’s behavior by mapping states to actions) directly. The main idea behind Policy Gradient is to parametrize(expressing something as a function of independent quantities called as parameters) the policy using a set of parameters (generally denoted as θ) and then optimize these parameters to maximize the expected return.
+
+One of the simpler approaches that accurately demonstrates Policy Gradient methods is the REINFORCE algorithm. In the REINFORCE algorithm, we begin by randomly initializing the “Policy Parameters,” which will be optimized over subsequent time steps or episodes. The size or length of these policy parameters depends on the shape of the state or observation space. For now, let’s assume we’re using the CartPole environment. You can learn more about the CartPole environment and its specifications in the Gym documentation. Since we’re considering the CartPole environment, the state or observation space has four dimensions. We’ll use alpha as a hyperparameter to denote the learning rate.
+
+For each episode, we will calculate the dot product of the observation space and the policy parameters, then pass the resulting value through a sigmoid function to obtain a probability. Based on this probability, we can decide which action to take. After taking an action, we update the policy parameters using the following update rule:
+param=param+α×(1−prob)×obs×rew
+
+The code for the same thing is given below :
+
+```python
+# initializing the environment - cartpole
+# 1 loading the cartpole environment 
+cartpole_env=gym.make('CartPole-v1',render_mode='human')
+print(cartpole_env.action_space)
+print(cartpole_env.observation_space)
+
+cartpole_env.reset(seed=58)
+
+cartpole_env.action_space.seed(58)
+
+def reinforce(env,param,alpha,episodes):
+    reward_data=[]
+    for each_episode in range(episodes):
+        observation = env.reset()[0]
+        episode_data = []
+        
+        done = False
+        total_reward=0
+        while not done:
+            cartpole_env.render()
+            
+            # calculating the policy value 
+            policy_value = np.dot(param, observation)
+            # apply sigmoid function to get the probability 
+            prob = 1 / (1 + np.exp(-policy_value))
+            # print("The probability is and the type of probability is: ",prob,type(prob))
+
+            if prob > 0.5:
+                action = 1
+            else:
+                action = 0
+
+            # get the next observation and reward 
+            next_observation, reward, done, _, _ = env.step(action)
+            episode_data.append((observation, action, reward, prob))
+            total_reward+=reward
+            observation = next_observation
+
+        # updating the policy parameters 
+        for i in range(len(episode_data)):
+            obs, act, rew, prob = episode_data[i]
+            # applying the update rule
+            param = param + alpha * (1 - prob) * obs * rew
+        
+        reward_data.append(total_reward)
+
+    return param,reward_data
+
+
+cartpole_env.reset()
+cartpole_env_size=cartpole_env.observation_space.shape[0]
+alpha=0.001
+episodes=10
+
+policy_params=np.array(np.random.rand(4)*2-1)
+updated_policy_params,reward_data=reinforce(cartpole_env,policy_params,alpha,episodes)
+print(f"The initial Policy Parameters were {policy_params} and the updated Policy Params were {updated_policy_params}")
+print("The rewards obtained are : ",reward_data)
+print(f"The Max reward obtained is : {max(reward_data)} and the Min reward obtained is : {min(reward_data)}")
+
+
+episodes_datapoints=np.arange(0,episodes,1)
+plt.plot(episodes_datapoints,reward_data)
+```
+
+To wrap things up, both Q-Learning and Policy Gradient methods have their place in the world of reinforcement learning.
+
+Q-Learning is super handy when you’ve got a smaller, manageable environment. It’s all about filling in that Q-Table to help your agent figure out the best moves. But as things get more complex, like with bigger or more continuous environments, Q-Learning can start to struggle.
+
+That’s where Policy Gradient methods, like the REINFORCE algorithm, come in. Instead of messing with Q-values, these methods focus on tweaking the policy directly, which makes them better suited for tougher tasks. So, if you’re dealing with a more complex environment, Policy Gradient methods might be the way to go.
+
+At the end of the day, knowing when to use Q-Learning or Policy Gradient methods is key. Both are awesome tools depending on what kind of problem you’re trying to solve!
+

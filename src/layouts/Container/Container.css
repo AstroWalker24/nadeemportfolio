@@ -1,0 +1,14 @@
+/* ─── Container ──────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+.container--narrow { max-width: 768px;  }
+.container--wide   { max-width: 1400px; }
+
+@media (min-width: 768px) {
+  .container { padding-inline: var(--space-8); }
+}

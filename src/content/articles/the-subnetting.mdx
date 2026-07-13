@@ -1,0 +1,80 @@
+export const meta = {
+  title: 'The Subnetting',
+  slug: 'the-subnetting',
+  date: '2024-09-07',
+  readTime: '20 min',
+  tags: ['Subnetting', 'Computer Networking', 'Cybersecurity'],
+  description: 'The subnetting guide I wish I had when I spent a week struggling to understand computer networks.',
+}
+
+Subnetting can be a real challenge for beginners, but it’s super important when it comes to computer networks. If you want to really get networking concepts down, mastering subnetting is a must.
+
+I had a tough time getting the hang of subnetting too, mainly because I couldn't find good resources. I ended up spending about a week trying to learn and practice with real-world scenarios. Then I came across a YouTube video by Network Chuck, who did an amazing job of breaking down the networking concepts. This article actually uses examples from his subnetting playlist, so if you prefer, you can check out his videos instead.
+
+
+Before diving into subnetting, it’s important to have a basic understanding of how IP addresses work. You’ll also need to know how to convert IP addresses between binary and decimal. 
+
+## Subnet mask 
+A Subnet Mask is a most frequent term you might have heard when it comes to networking and Subnetting. A subnet mask is a 32 bit number that is used to divide an IP address to its corresponding Host Portion and Network Portion. Network Portion is considered to be series of numbers that cannot be changed and it identifies the network . Whereas Host Portion is considered to be series of bits that can be changed and this identifies the specific host within that network.
+
+Lets understand this using an example:
+Consider an IP address 192.168.1.10 with a subnet mask of 255.255.255.0. Lets convert these into their respective Binary representations
+
+192.168.1.10 = 11000000.10101000.00000001.00001010
+255.255.255.0 = 11111111.11111111.11111111.00000000
+
+In this case, the first 24 bits (the 1’s in the subnet mask) represent the network portion, and the next 8 bits (the 0’s) represent the host portion. This means the network address is 192.168.1.0, which is the first address in the subnet. The broadcast address, 192.168.1.255, is the last address in the subnet.
+
+## Classless Interdomain Routing
+Let’s take the IP address 10.0.0.1/16 as an example. This might look a bit different, but it’s called CIDR notation. The /16 indicates the subnet mask, meaning 16 bits are reserved for the network potion. This subnet allows 2¹⁶ -2 hosts , the remaining 2 are for network address and broadcast address. In our case, the network address is 10.0.0.0 and the broadcast address is 10.0.255.255.
+
+In simple terms, a subnet mask identifies the network portion of an IP address, while CIDR notation is a shorthand way to represent that subnet mask. Subnetting lets us break down a larger network into smaller, more manageable subnets, each with its own network address and broadcast address.
+
+Now that we’ve covered subnet masks and the basics, let’s dive into how to actually perform subnetting — breaking down a larger network into smaller subnets. Let’s go through an example to understand this better:
+
+Let’s consider a larger network with the network address 172.16.0.0/16. We need to divide this larger network into 4 subnets using CIDR notation. The corresponding subnet mask for this network is 255.255.0.0.
+
+The first step is to convert these decimal numbers into binary. The binary form of 172.16.0.0 is 10101100.00010000.00000000.00000000, and the binary form of the subnet mask is 11111111.11111111.00000000.00000000.
+
+Since we need 4 subnets, we calculate the number of extra bits required using the formula subnets = 2^n. For 4 subnets, we have 4 = 2², so we need to borrow 2 extra bits from the host portion.
+
+If we borrow 2 bits from the host portion, the new subnet mask becomes 11111111.11111111.11000000.00000000. The corresponding decimal subnet mask is 255.255.192.0, and the CIDR notation for the new subnet is 172.16.0.0/18.
+
+This is the network address of the first subnet created. To find the range of each subnet, we use the formula 2^(8-n), where n is the number of host bits borrowed. In our case, it's 2^(8-2) = 2^6 = 64
+
+So, the first subnet ranges from 172.16.0.0 to 172.16.63.255, where 172.16.0.0 is the network address and 172.16.63.255 is the broadcast address. The second subnet ranges from 172.16.64.0 to 172.16.127.255. The third subnet covers 172.16.128.0 to 172.16.191.255, and the last subnet ranges from 172.16.192.0 to 172.16.255.255.
+
+Let’s consider another example where the network address of a larger network is 10.1.1.0/24. The corresponding subnet mask for this network is 255.255.255.0, which in binary is 11111111.11111111.11111111.00000000.
+
+This time, instead of dividing the network into a fixed number of subnets, we need to divide it based on the number of hosts required in each subnet. Let’s assume each subnet should have 40 hosts. In the previous example, we based our subnetting on the number of subnets needed, but now we’ll base it on the number of hosts.
+
+First, we need to determine how many host bits should be borrowed. The formula for this is 2^n > hosts required. Since we need to accommodate 40 hosts, a value of n = 5 gives us 32 hosts, which isn't enough. But n = 6 gives us 64 hosts, which can easily accommodate 40 hosts.
+
+So, we need to reserve 6 bits for the hosts, leaving us with 8 - 6 = 2 bits to borrow from the host portion. After borrowing these 2 bits, the new subnet mask in binary is 11111111.11111111.11111111.11000000, and the corresponding decimal subnet mask is 255.255.255.192. The CIDR notation for this new subnet is 10.1.1.0/26.
+
+Next, we find the increment, which is 2^n = 64 in this case. This means the first subnet ranges from 10.1.1.0 to 10.1.1.63, the second subnet starts at 10.1.1.64, and the third subnet begins at 10.1.1.128.
+
+
+## Variable Length Subnet Masks 
+In Variable Length Subnet Masking, we have to perform subnetting where each subnet has different host requirements. We have to follow slightly different approach in this case. Lets understand this using an example:
+
+Let’s take a base network with the network address 172.21.42.0/24. The corresponding subnet mask is 255.255.255.0, and in binary, it’s represented as 11111111.11111111.11111111.00000000.
+
+We need to divide this network into 4 subnets with varying host requirements:
+
+- Subnet-1: 10 hosts
+- Subnet-2: 57 hosts
+- Subnet-3: 26 hosts
+- Subnet-4: 117 hosts
+
+The key thing to remember here is to start subnetting with the subnet that requires the most hosts, which is Subnet-4 (117 hosts).
+
+First, we calculate how many host bits we need to borrow using the formula 2^n > 117. This gives us n = 7, meaning we need to reserve (8 - 7) = 1 bit for the network portion, and the new subnet mask becomes 11111111.11111111.11111111.10000000. In CIDR notation, this is 172.21.42.0/25, and the increment is 128.
+
+So, the range for Subnet-4 is 172.21.42.0 to 172.21.42.127/25.
+
+You can apply the same process to perform subnetting for the other subnets:
+
+- Subnet-3: Find the appropriate number of host bits for 26 hosts.
+- Subnet-2: Do the same for 57 hosts.
+- Subnet-1: Finally, calculate for 10 hosts.

@@ -1,0 +1,80 @@
+/* ===== Command Palette Button ================================ */
+.command-palette-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: var(--z-modal);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+
+  background: var(--color-surface-1);
+  border: 1px solid rgba(63, 185, 80, 0.22);
+  border-radius: var(--radius-md);
+
+  cursor: pointer;
+
+  transition:
+    background  var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow  var(--transition-fast);
+
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(63, 185, 80, 0.06);
+}
+
+.command-palette-button:hover {
+  background: rgba(63, 185, 80, 0.07);
+  border-color: rgba(63, 185, 80, 0.45);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.45),
+    0 0 18px rgba(63, 185, 80, 0.1),
+    0 0 0 1px rgba(63, 185, 80, 0.18);
+}
+
+.command-palette-button:active {
+  background: rgba(63, 185, 80, 0.12);
+  border-color: rgba(63, 185, 80, 0.55);
+}
+
+.command-palette-button__label {
+  font-family:    var(--font-code);
+  font-size:      13px;
+  font-weight:    600;
+  letter-spacing: -0.02em;
+  color:          var(--color-success);
+  line-height:    1;
+  user-select:    none;
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+/* On mobile the navbar renders its own >_ button; hide the fixed one */
+@media (max-width: 767px) {
+  .command-palette-button {
+    display: none;
+  }
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .command-palette-button {
+    bottom: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    gap: 2px;
+  }
+
+  .command-palette-button__icon {
+    font-size: 16px;
+  }
+
+  .command-palette-button__shortcut {
+    font-size: 9px;
+  }
+}

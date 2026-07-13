@@ -1,0 +1,88 @@
+/* ===== Contact =============================================== */
+.contact-section {
+  padding-top: 6rem;
+}
+
+@media (min-width: 768px) {
+  .contact-section {
+    padding-top: 8rem;
+  }
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.contact__eyebrow { justify-content: center; }
+
+.contact__heading {
+  font-size: clamp(2.25rem, 4.5vw, 3.25rem) !important;
+  letter-spacing: -0.04em !important;
+  margin-bottom: var(--space-5) !important;
+}
+
+.contact__sub {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 440px;
+  margin-bottom: var(--space-8);
+}
+
+/* ── Email display ────────────────────────────────────────────── */
+.contact__email {
+  display: inline-block;
+  font-family: var(--font-code);
+  font-size: clamp(1.05rem, 2.2vw, 1.5rem);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  padding-bottom: 5px;
+  margin-bottom: var(--space-10);
+  letter-spacing: -0.01em;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.contact__email:hover {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+.contact__email:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 6px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Actions ──────────────────────────────────────────────────── */
+.contact__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-8);
+}
+
+/* ── Open-to status ───────────────────────────────────────────── */
+.contact__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.contact__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-success);
+  box-shadow: 0 0 8px rgba(63, 185, 80, 0.65);
+  animation: status-pulse 2.8s ease-in-out infinite;
+  flex-shrink: 0;
+}

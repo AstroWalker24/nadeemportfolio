@@ -1,0 +1,161 @@
+/* ===== MDX Custom Components ================================= */
+
+/* ── Code block wrapper ─────────────────────────────────────── */
+.mdx-pre-wrap {
+  position: relative;
+  margin: var(--space-6) 0;
+}
+
+.mdx-pre-wrap pre {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-code);
+  font-size: 0.875rem;
+  line-height: 1.75;
+  padding: var(--space-5) !important;
+  tab-size: 2;
+}
+
+/* Override any background set by rehype-pretty-code to keep our surface */
+.mdx-pre-wrap pre[style] {
+  background-color: var(--color-surface-1) !important;
+}
+
+/* Code tokens — colours come from Shiki inline styles */
+.mdx-pre-wrap code {
+  font-family: inherit;
+  font-size: inherit;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  color: inherit;
+}
+
+/* Scrollbar */
+.mdx-pre-wrap pre::-webkit-scrollbar       { height: 6px; }
+.mdx-pre-wrap pre::-webkit-scrollbar-track { background: transparent; }
+.mdx-pre-wrap pre::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+}
+
+/* ── Copy button ────────────────────────────────────────────── */
+.mdx-copy {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  padding: 4px 10px;
+  font-family: var(--font-code);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    color            var(--transition-fast),
+    background       var(--transition-fast),
+    border-color     var(--transition-fast);
+}
+.mdx-copy:hover {
+  color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+.mdx-copy--done {
+  color: var(--color-success);
+  border-color: rgba(63, 185, 80, 0.25);
+}
+
+/* ── Headings with anchor links ─────────────────────────────── */
+.mdx-h2,
+.mdx-h3,
+.mdx-h4 {
+  position: relative;
+}
+
+.mdx-anchor {
+  opacity: 0;
+  margin-left: 0.4em;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.75em;
+  font-weight: 400;
+  transition: opacity var(--transition-fast);
+  user-select: none;
+}
+
+.mdx-h2:hover .mdx-anchor,
+.mdx-h3:hover .mdx-anchor,
+.mdx-h4:hover .mdx-anchor {
+  opacity: 1;
+}
+
+/* ── Links ──────────────────────────────────────────────────── */
+.mdx-link {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(34, 211, 238, 0.35);
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+.mdx-link:hover {
+  color: var(--color-accent-hover);
+  text-decoration-color: var(--color-accent-hover);
+}
+
+/* ── Blockquote ─────────────────────────────────────────────── */
+.mdx-blockquote {
+  border-left: 3px solid var(--color-accent);
+  margin: var(--space-6) 0;
+  padding: var(--space-4) var(--space-6);
+  background: rgba(34, 211, 238, 0.04);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.mdx-blockquote p {
+  margin: 0 !important;
+  color: var(--color-text-secondary) !important;
+  font-style: italic;
+}
+
+/* ── Table ──────────────────────────────────────────────────── */
+.mdx-table-scroll {
+  overflow-x: auto;
+  margin: var(--space-6) 0;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+}
+
+.mdx-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.mdx-table th,
+.mdx-table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mdx-table th {
+  font-family: var(--font-code);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  background: var(--color-surface-1);
+}
+
+.mdx-table tr:last-child td {
+  border-bottom: none;
+}
+
+.mdx-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}

@@ -1,0 +1,28 @@
+/* ===== Home Page ============================================= */
+.home {}
+
+/* ── Shared section anatomy ─────────────────────────────────────
+   Used by: Projects, Articles, Focus, Contact
+──────────────────────────────────────────────────────────────── */
+.section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-code);
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-4);
+}
+
+.section-eyebrow__num  { color: var(--color-accent); opacity: 0.85; }
+.section-eyebrow__dash { opacity: 0.3; }
+
+.section-h2 {
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--color-text-primary);
+  line-height: 1.18;
+}
