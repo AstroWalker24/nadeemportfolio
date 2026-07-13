@@ -74,7 +74,7 @@ const Contact = () => {
         window.open(siteConfig.socials.linkedin, '_blank', 'noopener,noreferrer');
       } else if (action.id === 'resume') {
         const a = document.createElement('a');
-        a.href     = '/resume.pdf';
+        a.href     = '/nadeemshaik.pdf';
         a.download = 'Nadeem_Shaik_Resume.pdf';
         document.body.appendChild(a);
         a.click();
@@ -94,7 +94,7 @@ const Contact = () => {
     { k: 'email',            v: siteConfig.email,            href: `mailto:${siteConfig.email}` },
     { k: 'github',           v: siteConfig.socials.github,   href: siteConfig.socials.github },
     { k: 'linkedin',         v: siteConfig.socials.linkedin, href: siteConfig.socials.linkedin },
-    { k: 'resume',           v: '/resume.pdf' },
+    { k: 'resume',           v: '/nadeemshaik.pdf' },
   ];
 
   return (

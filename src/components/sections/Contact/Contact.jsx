@@ -52,7 +52,7 @@ const Contact = () => (
           </Button>
           <Button
             as="a"
-            href="/resume.pdf"
+            href="/nadeemshaik.pdf"
             download
             variant="secondary"
             size="lg"
