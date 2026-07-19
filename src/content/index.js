@@ -70,12 +70,12 @@ export const articles = [
     href: '/writing/the-subnetting',
   },
   {
-    slug: 'policy-learning-qlearning',
-    title: 'Policy Learning methods vs Q Learning',
-    date: '2024-08-28',
-    readTime: '30 min',
-    tag: 'Reinforcement Learning',
-    href: '/writing/policy-learning-qlearning',
+    slug: 'frosted-glass-popos',
+    title: 'Frosted Glass in Pop!_OS 24.04 LTS',
+    date: '2026-07-19',
+    readTime: '15 min',
+    tag: 'Pop!_OS',
+    href: '/writing/frosted-glass-popos',
   },
 ];
 
