@@ -62,12 +62,12 @@ export const articles = [
     href: '/writing/accretion-disk-energy',
   },
   {
-    slug: 'the-subnetting',
-    title: 'The Subnetting',
-    date: '2024-09-07',
-    readTime: '20 min',
-    tag: 'Networking',
-    href: '/writing/the-subnetting',
+    slug: 'living-with-frosted-glass-popos',
+    title: 'Living With Frosted Glass in Pop!_OS: The Honeymoon Is Over',
+    date: '2025-07-21',
+    readTime: '8 min',
+    tag: 'Pop!_OS',
+    href: '/writing/living-with-frosted-glass-popos',
   },
   {
     slug: 'frosted-glass-popos',

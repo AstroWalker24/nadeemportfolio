@@ -1,0 +1,172 @@
+export const meta = {
+  title: 'Living With Frosted Glass in Pop!_OS: The Honeymoon Is Over',
+  slug: 'living-with-frosted-glass-popos',
+  date: '2026-07-21',
+  readTime: '8 min',
+  tags: ['popos', 'linux', 'cosmic', 'performance', 'follow-up'],
+  description:
+    'A follow-up to my first impressions of Pop!_OS Frosted Glass. After using it every day, I discovered several drawbacks and performance tradeoffs that only became apparent with long-term use.',
+}
+
+## Living With Frosted Glass for a Few More Days
+A few days ago, I wrote about how much I enjoyed the new Frosted Glass effect in the latest COSMIC desktop.
+
+And I still do.
+
+Visually, I think it's one of the nicest additions System76 has made recently.
+
+But after using it as my primary desktop every day, I started noticing things that simply weren't obvious during the first few hours.
+
+This isn't a correction to my previous article.
+
+It's what happened after the honeymoon phase.
+
+## The Desktop feels...Slightly Heavier 
+The first thing I noticed wasn't dramatic.
+
+Nothing crashed.
+
+Nothing became unusable.
+
+Instead, the entire desktop felt just a little less effortless.
+
+Window animations weren't as snappy as before.
+
+Opening the launcher sometimes felt like it took a fraction longer.
+
+Switching workspaces wasn't as fluid as I remembered.
+
+If you've never used the desktop without Frosted Glass, you probably won't notice.
+
+But after months of using COSMIC before enabling it, the difference became surprisingly easy to feel.
+
+It's subtle.
+
+Yet it's there.
+
+## CPU Usage Isn't Free
+Blur effects aren't magic.
+
+Every transparent surface has to sample whatever is behind it, blur those pixels, and redraw the result whenever something changes.
+
+Menus.
+
+Notifications.
+
+Panels.
+
+The launcher.
+
+Quick settings.
+
+Every one of these now requires additional rendering work compared to simply drawing an opaque rectangle.
+
+When I monitored my system, I noticed CPU activity was consistently a little higher while interacting with the desktop.
+
+Not dramatically.
+
+Not enough to be a problem on modern hardware.
+
+But definitely higher than before.
+
+This isn't necessarily a flaw in COSMIC.
+
+It's simply the cost of real-time compositing.
+
+Beautiful interfaces almost always require more work from the system.
+
+## Small Delays Add Up
+The interesting thing is that none of the slowdowns are individually noticeable.
+
+Instead, they accumulate.
+
+You open notifications.
+
+Open the launcher.
+
+Switch workspaces.
+
+Resize windows.
+
+Open quick settings.
+
+Each interaction feels perhaps one or two percent slower.
+
+After hours of usage, that tiny difference becomes something your brain starts recognizing even if you can't immediately explain why the desktop feels slightly less responsive.
+
+
+## Wallpaper Matters more than I Expected 
+In my previous article, I mentioned that some wallpapers make the effect look better than others.
+
+I still think that's true.
+
+But I now realize it's a bigger limitation than I initially thought.
+
+If your wallpaper is already soft or lacks contrast, the blur almost disappears.
+
+If it's too colorful, menus can sometimes lose visual definition despite remaining readable.
+
+Ironically, the feature that is supposed to improve aesthetics can sometimes make the interface feel less distinctive depending entirely on what's sitting behind it.
+
+A good feature shouldn't rely this heavily on choosing the "right" wallpaper.
+
+## It's Easier to Appreciate Than to Notice
+This ended up being the most surprising realization.
+
+During the first day, I constantly admired the Frosted Glass effect.
+
+After several days, I barely noticed it anymore.
+
+That's not because it became worse.
+
+It's because our brains adapt remarkably quickly to visual improvements.
+
+Meanwhile, the tiny responsiveness differences remained noticeable because they directly affect interaction rather than appearance.
+
+The beauty faded into the background.
+
+The performance characteristics did not.
+
+## Would i keep it enabled 
+Honestly...
+
+I'm undecided.
+
+If I'm showing someone COSMIC, Frosted Glass stays on.
+
+It genuinely makes the desktop look modern, polished, and premium.
+
+But when I'm spending an entire day writing code, reading documentation, and switching between dozens of windows, I find myself preferring responsiveness over aesthetics.
+
+The difference isn't huge.
+
+It's just enough that I notice it.
+
+## Final Thoughts 
+I don't think System76 made a mistake by adding Frosted Glass.
+
+Far from it.
+
+The implementation is tasteful, optional, and fits naturally into COSMIC's design language.
+
+But after living with it for several days, I've come to appreciate the tradeoff it introduces.
+
+Every visual enhancement has a cost.
+
+Sometimes that cost is GPU time.
+
+Sometimes it's CPU usage.
+
+Sometimes it's battery life.
+
+And sometimes it's simply the feeling that your desktop isn't quite as lightweight as it used to be.
+
+Will I turn it back on occasionally?
+
+Absolutely.
+
+Will I leave it enabled all the time?
+
+I'm not so sure anymore.
+
+Well, I'd definitely appreciate someone who could help clear up this confusion for me.
